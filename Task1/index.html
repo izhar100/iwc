@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task-1 Reactjs frontend task</title>
+  <!-- React CDN links -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <style>
+    /* Add some basic styling to resemble Excel or Google Sheets */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      text-align: center;
+      background-color: #f1f1f1;
+      border: none;
+    }
+    .first-column{
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+
+    td {
+      background-color: #fff;
+    }
+    td:nth-child(2){
+        width: 100px;
+        min-width: none;
+    }
+    td:nth-child(3){
+        width: 180px;
+        min-width: none;
+    }
+    td:nth-child(4){
+        width: 140px;
+        min-width: none;
+    }
+    td:nth-child(5){
+        width: 80px;
+        min-width: none;
+    }
+    td:nth-child(6){
+        width: 220px;
+        min-width: none;
+    }
+    td:nth-child(7){
+        width: 140px;
+        min-width: none;
+    }
+
+    td[contenteditable=true]:focus {
+      outline: 2px solid #00f;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Component here -->
+  <script>
+    const { useState, useEffect, createRoot } = React;
+    function EditableTable() {
+  const [tableData, setTableData] = React.useState([
+    { id: 1, field1: 'Onboarding Call', field2: "", field3: "", field4: "", field5: "", field6: "", field7: "" },
+    { id: 2, field1: 'Google Search Access',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 3, field1: 'Google Analytics Access',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 4, field1: 'Website Access',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 5, field1: 'Technical Audit',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 6, field1: 'Anchor Text and Semantics Analysis',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 7, field1: 'Google Search Access',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 8, field1: 'Competitor Analysis',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 9, field1: 'Anchor Text/URL Mapping',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 10, field1: 'Google Data Studio Report + Local Reporting Suite',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 11, field1: 'Site Level Optimization',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 12, field1: 'On Page Optimization',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 13, field1: 'Content Creation',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 14, field1: 'Content Publishing',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 15, field1: 'Premium Press Release',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 16, field1: 'Authority Niche Placements',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 17, field1: 'Review Management',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 18, field1: 'Index Links',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+        { id: 19, field1: 'Video Recap',field2:"",field3:"",field4:"",field5:"",field6:"",field7:"" },
+  ]);
+
+  const handleCellEdit = (id, field, value) => {
+    const updatedData = tableData.map(row => {
+      if (row.id === id) {
+        return { ...row, [field]: value };
+      }
+      return row;
+    });
+    setTableData(updatedData);
+    //ready to make api request with these data
+    console.log('Updated Table Data:', updatedData);
+  };
+
+  const handleInputChange = (id, field, e) => {
+    const value = e.target.textContent;
+    handleCellEdit(id, field, value);
+  };
+
+  const tableHeaders = React.createElement(
+    'tr',
+    null,
+    React.createElement('th', null, 'MONTH 1'),
+    React.createElement('th', null, ''),
+    React.createElement('th', null, ''),
+    React.createElement('th', null, ''),
+    React.createElement('th', null, ''),
+    React.createElement('th', null, ''),
+    React.createElement('th', null, '')
+  );
+
+  const tableRows = tableData.map(row => (
+    React.createElement('tr', { key: row.id },
+      React.createElement('td', { className: 'first-column' }, row.field1),
+      React.createElement('td', {
+        contentEditable: true,
+        onBlur: (e) => handleInputChange(row.id, 'field2', e)
+      }, row.field2),
+      React.createElement('td', {
+        contentEditable: true,
+        onBlur: (e) => handleInputChange(row.id, 'field3', e)
+      }, row.field3),
+      React.createElement('td', {
+        contentEditable: true,
+        onBlur: (e) => handleInputChange(row.id, 'field4', e)
+      }, row.field4),
+      React.createElement('td', {
+        contentEditable: true,
+        onBlur: (e) => handleInputChange(row.id, 'field5', e)
+      }, row.field5),
+      React.createElement('td', {
+        contentEditable: true,
+        onBlur: (e) => handleInputChange(row.id, 'field6', e)
+      }, row.field6),
+      React.createElement('td', {
+        contentEditable: true,
+        onBlur: (e) => handleInputChange(row.id, 'field7', e)
+      }, row.field7)
+    )
+  ));
+
+  return (
+    React.createElement('table', null,
+      React.createElement('thead', null, tableHeaders),
+      React.createElement('tbody', null, tableRows)
+    )
+  );
+}
+
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+root.render(React.createElement(EditableTable));
+
+
+    </script>
+</body>
+</html>
