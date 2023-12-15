@@ -39,4 +39,5 @@ To run this project locally or integrate it with your backend:
 
 ## Resources
 
+- [Repository link](https://github.com/izhar100/iwc/tree/main/Task1)
 - [ReactJS Official Documentation](https://reactjs.org/docs/add-react-to-a-website.html)
