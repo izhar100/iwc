@@ -1,6 +1,4 @@
-Absolutely, I can help you draft a README file for your GitHub repository. Here's an example template you can use:
 
----
 
 # Task 1 - ReactJS Frontend Task
 
